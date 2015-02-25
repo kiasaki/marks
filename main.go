@@ -29,7 +29,7 @@ func main() {
 	SetDB(data.Connect(Cfg().PostgresURL))
 
 	if Cfg().CreateDb {
-		createDb()
+		createDb(DB())
 	} else {
 		handleHTTP()
 	}

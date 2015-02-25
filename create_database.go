@@ -1,11 +1,14 @@
 package main
 
-import "log"
+import (
+	"database/sql"
+	"log"
+)
 
-func createDb() {
+func createDb(db *sql.DB) {
 	log.Println("Creating tables...")
-	_, err := DB().Exec(`
 
+	_, err := db.Exec(`
 CREATE TABLE IF NOT EXISTS notes (
   id uuid,
   title varchar(255),
@@ -14,8 +17,8 @@ CREATE TABLE IF NOT EXISTS notes (
   PRIMARY KEY (id),
   CONSTRAINT notes_id UNIQUE (id)
 );
-
 	`)
+
 	if err != nil {
 		panic(err)
 	}
