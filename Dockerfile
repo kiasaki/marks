@@ -1,8 +1,8 @@
 FROM google/golang:1.4
 
-WORKDIR /gopath/src/github.com/kiasaki/marks
-ADD . /gopath/src/github.com/kiadaki/marks/
-RUN go get github.com/kiasaki/marks
+WORKDIR /gopath/src/app
+ADD . /gopath/src/app/
+RUN go get app
 
 CMD []
-ENTRYPOINT ["/gopath/bin/marks"]
+ENTRYPOINT ["/gopath/bin/app"]
