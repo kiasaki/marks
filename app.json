@@ -9,7 +9,6 @@
     "postdeploy": "marks -create-db -postgres-url=$DATABASE_URL"
   },
   "env": {
-    "BUILDPACK_URL": "https://github.com/kr/heroku-buildpack-go.git",
     "AUTH_USER": {
       "description": "The basic auth username to protect your notes (optionnal)",
       "value": "",
