@@ -1,65 +1,46 @@
 # Marks
 
-#### Simplistic Markdown notebook
+_A feature-less markdown notebook_
 
 ## Introduction
 
-**Marks** is a simple notebook/wiki style app that allows you to sketch out, keep
-track of, document what's keeping you awake and you're lugging around in your head.
+**Marks** is a simple note taking app that mostly gets out of the way. It's not really feature full but it might be just what you are looking for.
 
-It's simple and it works, feel free to clone and deploy on _Heroku_.
+Feel free to try it out on Heroku using the deploy button below:
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/kiasaki/marks)
 
-## Technologies
-
-This app is the most simple and vanilla Goland app, no fancy framework, libs
-as needed, and snippets copied over when small.
-
-Your notes/thoughts/documentation is secured using super advanced Basic Auth.
-Although you could chose to simply let your darkest secret open to the public,
-by not setting a user and password, it's a choice you have...
-
-Main packages used:
-
-- `database/sql` as way to store notes and retrive them
-- `github.com/lib/pq` driver for postgresql
-- `html/template` for rendering pages
-- `net/http` for all http server needs
-- `flag` for configuration
-- `github.com/kiasaki/batbelt`
-
 ## Getting started
 
-Use:
+**Running:**
 
 ```bash
 go get github.com/kiasaki/marks
-marks -postgr...
+marks -help # for help
+marks -port 8080 -postgres-url postgres://localhost/marks?sslmode=disable
 ```
 
-Develop:
+**Developing:**
 
 ```bash
 go get github.com/kiasaki/marks
 cd $GOPATH/src/github.com/kiasaki/marks
-go run *.go -postgre...
+go run *.go -postgres-url ...
 ```
 
-An before that you should have started postgresql and ran the `db.sql` file
-on the database you wish to use so you have the necessaty tables created.
+**Creating the database tables before first use:**
+
+_Make sure your PostgreSQL server is started and that you are pointing to
+an existing database._
 
 ```bash
-postgres&
-psql marks -f db.sql
+marks -create-db -postgres-url ...
 ```
 
-## Look and feel
-
-Still WIP but gives an idea...
+## Screenshot
 
 ![Screenshot](https://raw.githubusercontent.com/kiasaki/marks/master/screenshot.png)
 
 ## License
 
-MIT
+MIT. See `LICENSE` file.

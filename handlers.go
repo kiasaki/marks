@@ -13,7 +13,7 @@ import (
 func handleNewPage(w http.ResponseWriter, r *http.Request) {
 	contents, err := RenderNewPage(Page{
 		Notes:       data.MustGetAllNotes(DB()),
-		Title:       "New note",
+		Title:       "",
 		Body:        "",
 		PostbackURL: "/new",
 	})

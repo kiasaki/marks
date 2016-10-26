@@ -24,23 +24,23 @@ const layoutContents = `
 		<a href="/new">New note</a>
 	  </header>
 	  <ul>
+		{{$id := .Id}}
 		{{range .Notes}}
-		  <li>
+		  <li class="{{if eq $id .Id}}active{{end}}">
 			<a href="/n/{{.Id}}">{{.Title}}</a>
 		  </li>
 		{{end}}
 	  </ul>
 	  <footer>
 		<a href="http://github.com/kiasaki/marks">Marks</a>
-		is open source software by
-		<a href="http://github.com/kiasaki">kiasaki</a>
+		is open source software.
 	  </footer>
 	</nav>
 
 	<section>
 	  <form action="{{.PostbackURL}}" method="post">
 		<header>
-		  <input type="text" name="title" class="title" value="{{.Title}}" placeholder="Fancy note title" />
+		  <input type="text" name="title" class="title" value="{{.Title}}" placeholder="Note title" />
 		  <div class="buttons">
 			{{template "buttons" .}}
 		  </div>
@@ -56,7 +56,7 @@ const layoutContents = `
 `
 
 const editorContents = `
-  <textarea id="noteBody" name="body" placeholder="Write you markdown here...">{{.Body}}</textarea>
+  <textarea id="noteBody" name="body">{{.Body}}</textarea>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/codemirror.min.css" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/codemirror.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/4.12.0/mode/markdown/markdown.min.js"></script>
@@ -68,18 +68,12 @@ const editorContents = `
 	  viewportMargin: Infinity,
 	  mode: 'markdown',
 	});
-	var input = document.querySelector('input.title')
-	input.onfocus = function() {
-	  if (input.value === "New note") {
-		input.value = "";
-	  }
-	};
   </script>
 `
 
 const newContents = `
 {{define "buttons"}}
-  <button type="submit" class="btn btn-save">Save</button>
+  <button type="submit" class="btn">Save</button>
 {{end}}
 {{define "contents"}}
 ` + editorContents + `
@@ -88,8 +82,8 @@ const newContents = `
 
 const viewContents = `
 {{define "buttons"}}
-  <a href="/n/{{.Id}}/delete" class="btn btn-delete" id="deleteBtn">Delete</a>
-  <a href="/n/{{.Id}}/edit" class="btn btn-edit">Edit</a>
+  <a href="/n/{{.Id}}/delete" class="btn btn-default" id="deleteBtn">Delete</a>
+  <a href="/n/{{.Id}}/edit" class="btn">Edit</a>
 {{end}}
 {{define "contents"}}
   <div class="body">
@@ -97,7 +91,7 @@ const viewContents = `
   </div>
   <script>
 	deleteBtn.onclick = function(e) {
-	  (!confirm('Sure?')) && e.preventDefault();
+	  (!confirm('Are you sure?')) && e.preventDefault();
 	};
   </script>
 {{end}}
@@ -106,7 +100,7 @@ const viewContents = `
 const editContents = `
 {{define "buttons"}}
   <a href="/n/{{.Id}}" class="btn btn-default">Cancel</a>
-  <button type="submit" class="btn btn-save">Save</button>
+  <button type="submit" class="btn">Save</button>
 {{end}}
 {{define "contents"}}
 ` + editorContents + `
